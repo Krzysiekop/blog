@@ -11,6 +11,9 @@
               <h5 class="mt-0"><?php echo $comm['name']; ?></h5>
 					 <?php echo $comm['body']; ?>
 			  </div>
+              <?php if ($this->session->userdata('Admin')===true){ ?>
+                  <a href="<?php echo site_url('comment/delete/'.$comm['id']); ?>" class="btn btn-danger">Delete</a>
+              <?php }?>
           </div>
 <br>
       <?php endforeach; ?>

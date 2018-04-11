@@ -16,8 +16,8 @@
 <?php echo form_open('comment/create/'); ?>
 
             <div class="form-group">
-    <label for="title">Title</label>
-    <input type="input" class="form-control" name="title" /><br />
+    <label for="name">Name</label>
+    <input type="input" class="form-control" name="name" value="<?php   echo $this->session->userdata('username') ;   ?>" readonly/><br />
             </div>
             <div class="form-group">
     <label for="text">Text</label>

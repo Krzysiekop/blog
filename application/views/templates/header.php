@@ -28,7 +28,11 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+
+            <!--NAVBAR GDY USER JEST ZALOGOWANY -->
+           <?php if (null !==($this->session->userdata('username'))) { ?>
+
+            <ul class="navbar-nav ml-auto">
                           <a class="nav-link"><?php  if (null !==($this->session->userdata('username'))) {
 								echo "Witaj ".$this->session->userdata('username');	}  ; ?>  
 						  </a>
@@ -38,20 +42,35 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://localhost/blog/index.php/news/create">Create post</a>
+              <a class="nav-link" href="<?php echo site_url('news/create/'); ?>">Create post</a>
             </li> 
               <li class="nav-item">
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="http://localhost/blog/index.php/users/login">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="http://localhost/blog/index.php/users/create">register</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="<?php echo site_url('users/logoff/'); ?>">Logoff</a>
             </li>
           </ul>
+
+            <!-- NAVBAR GDY USER JEST NIE ZALOGOWANY -->
+            <?php } else{  ?>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo base_url(); ?>index.php/news">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo site_url('users/login/'); ?>">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo site_url('users/create/'); ?>">Register</a>
+                </li>
+
+            </ul>
+            <?php  }  ?>
         </div>
       </div>
     </nav>

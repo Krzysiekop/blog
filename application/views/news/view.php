@@ -40,18 +40,11 @@ $id=$this->uri->segment(2);
          
           <hr>
 
-     
-
-        
-
-       
-
-      
-
-    
-
-
-
-
 <br>
-<a href="<?php echo site_url("comment/create/$id"); ?>">comment</a>
+
+            <!-- Jeżeli zalogowany to moze dodac komentarz -->
+            <?php  if ($this->session->userdata('is_logged')===true){ ?>
+            <a href="<?php echo site_url("comment/create/$id"); ?>">Add a comment</a>
+            <br>
+            <?php  } else {}  ?>
+<br>

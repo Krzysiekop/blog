@@ -1,10 +1,7 @@
-<h2><?php echo $title;  ?></h2>
 
 
-<!-- <h3><?php  //if (null !==($this->session->userdata($newdata['username']) ) ) {
-//		echo 'nic'; }
-//		 else {
-//		 var_dump($this->session->all_userdata()); } 	?></h3> -->
+
+
  <div class="container">
 
       <div class="row">
@@ -16,9 +13,7 @@
           
           </h1>
 
-<h4> <?php // print_r($this->session->all_userdata()) ?> </h4>
-<h5> <?php // if (null !==($this->session->userdata('username'))) {
-	//"Witaj ".$this->session->userdata('username');  	}  ; ?> </h5>
+
 
 											
 													
@@ -32,9 +27,11 @@
               <h2 class="card-title"><?php echo $news_item['title']; ?></h2>
               <p class="card-text"><?php echo $news_item['text']; ?></p>
               <a href="<?php echo site_url('news/'.$news_item['id']); ?>" class="btn btn-primary">View article &rarr;</a>
-			  <a href="<?php echo site_url('news/edit/'.$news_item['id']); ?>" class="btn btn-primary">Edit</a>
-			  <a href="<?php echo site_url('news/delete/'.$news_item['id']); ?>" class="btn btn-danger">Delete</a>
 
+              <?php if ($this->session->userdata('Admin')===true) {?>
+              <a href="<?php echo site_url('news/edit/'.$news_item['id']); ?>" class="btn btn-primary">Edit</a>
+			  <a href="<?php echo site_url('news/delete/'.$news_item['id']); ?>" class="btn btn-danger">Delete</a>
+              <?php } ?>
             </div>
             <div class="card-footer text-muted">
               Posted on <?php echo $news_item['created_at']; ?> by
@@ -113,13 +110,3 @@
       <!-- /.row -->
 
     </div>
-
-
-<br>
-<a href="http://localhost/blog/index.php/news/create">Create post</a>
-<br>
-<a href="http://localhost/blog/index.php/users/login">LOGIN NOW DUDE</a>
-<br>
-<a href="http://localhost/blog/index.php/users/create">REGISTER NOW DUDE</a>
-<br>
-<a href="<?php echo site_url('users/logoff/'); ?>">LOGOFF</a>

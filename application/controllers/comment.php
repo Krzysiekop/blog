@@ -16,22 +16,22 @@ class Comment extends CI_Controller {
         
 
 
-        public function view($slug = null)
-        {
-
-                $data['news_item'] = $this->news_model->get_news($slug);
-           if (empty($data['news_item']))
-        {
-                show_404();
-        }
-
-				$data['title'] = $data['news_item']['title'];
-
-				$this->load->view('templates/header', $data);
-				$this->load->view('news/view', $data);
-				$this->load->view('templates/footer');
-		
-		}
+//        public function view($slug = null)
+//        {
+//
+//                $data['news_item'] = $this->news_model->get_news($slug);
+//           if (empty($data['news_item']))
+//        {
+//                show_404();
+//        }
+//
+//				$data['title'] = $data['news_item']['title'];
+//
+//				$this->load->view('templates/header', $data);
+//				$this->load->view('news/view', $data);
+//				$this->load->view('templates/footer');
+//
+//		}
 
 
                 public function create()
@@ -42,21 +42,21 @@ class Comment extends CI_Controller {
 
                 $data['title'] = 'Create a comment';
 
-                $this->form_validation->set_rules('title', 'Title', 'required|min_length[4]');
+                $this->form_validation->set_rules('name', 'Name', 'required|min_length[4]');
                 $this->form_validation->set_rules('text', 'Text', 'required|min_length[4]');
 
-                if ($this->form_validation->run() === FALSE)
-                {
-                    $this->load->view('templates/header', $data);
-                    $this->load->view('comment/create');
-                    $this->load->view('templates/footer');
+                    if ($this->form_validation->run() === FALSE)
+                    {
+                        $this->load->view('templates/header', $data);
+                        $this->load->view('comment/create');
+                       // $this->load->view('templates/footer');
+                    }
 
-                }
-                else
-                {
-                    $this->comment_model->create();
-                    $this->load->view('news/success');
-                }
+                    else
+                    {
+                        $this->comment_model->create();
+                        $this->load->view('news/success');
+                    }
 
 
                 }
@@ -64,38 +64,12 @@ class Comment extends CI_Controller {
                     public function delete($id)
                 {
 
-                    $this->news_model->delete_news($id);
+                    $this->comment_model->delete($id);
                 }
 
 
 
 
-                    public function edit($id)
-                {
-
-                $this->load->helper('form');
-                $this->load->library('form_validation');
-
-                $data['title'] = 'Edit a news item';
-
-                $this->form_validation->set_rules('title', 'Title', 'required|min_length[4]');
-                $this->form_validation->set_rules('text', 'Text', 'required|min_length[4]');
-
-                if ($this->form_validation->run() === FALSE)
-                {
-                    $this->load->view('templates/header', $data);
-                    $this->load->view('news/edit');
-                    $this->load->view('templates/footer');
-
-                }
-
-                else
-                {
-                    $this->news_model->edit_news($id);
-                    $this->load->view('news/success');
-                }
-
-                }
 
 
 

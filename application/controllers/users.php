@@ -24,6 +24,9 @@ class Users extends CI_Controller {
 
                     $data['title'] = 'Register for free';
 
+
+                    //mail oraz name UNIKALNE
+
                     $this->form_validation->set_rules('username', 'Username', 'required|min_length[3]|is_unique[users.username]');
                     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
                     $this->form_validation->set_rules('password', 'Password', 'required|min_length[3]');
@@ -32,7 +35,7 @@ class Users extends CI_Controller {
                     {
                         $this->load->view('templates/header', $data);
                         $this->load->view('users/create');
-                        $this->load->view('templates/footer');
+                       // $this->load->view('templates/footer');
 
                     }
                     else
@@ -110,7 +113,7 @@ class Users extends CI_Controller {
                             {
                                 $this->load->view('templates/header', $data);
                                 $this->load->view('users/login');
-                                $this->load->view('templates/footer');
+                              //  $this->load->view('templates/footer');
                             
                                       
 
@@ -121,21 +124,30 @@ class Users extends CI_Controller {
                            {
                              
                                     $IsExist = $this->users_model->login_user();
-                                if ($IsExist == 1) {
-                               // session_start();
-                               //          $_SESSION["is_logged"] = "TRUE";
-                               //          $_SESSION["name"] = $this->input->post('username');
+                                if ($IsExist == 0) {
+
 
                                      //Dodanie danych do sesji
-                                 $newdata = array(
-                                'is_logged' => TRUE,
-                                'username' => $this->input->post('username')
-                            );
+                                    if ($this->input->post('username') == 'Admin'){
+
+                                $newdata = array(
+                                'is_logged' => true,
+                                'username' => $this->input->post('username'),
+                                'Admin' => true  );                                  }
+
+                                    else   {
+                                    $newdata = array(
+                                    'is_logged' => true,
+                                    'username' => $this->input->post('username'));
+
+                                 }
+
+
 
                             $this->session->set_userdata($newdata);
                                 
 
-                            // $this->session->set_userdata($sessionArray);
+
                            $this->load->view('news/success');
                                 
                             }
@@ -161,20 +173,7 @@ class Users extends CI_Controller {
 
 
                         }
-    
 
-
-
-
-
-                        
-
-
-
-
-
-
-                
         
     } 
 

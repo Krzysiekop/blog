@@ -4,7 +4,7 @@ class comment_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
-        
+
 	}
 	
 	
@@ -16,12 +16,10 @@ class comment_model extends CI_Model {
     
 
     $data = array(
-        'name' => $this->input->post('title'),
+        'name' => $this->input->post('name'),
         'body' => $this->input->post('text'),
         'post_id' => $this->input->post('id'),
     );
-
-
 
 
     return $this->db->insert('comments', $data);
@@ -35,7 +33,7 @@ class comment_model extends CI_Model {
         //$query = $this->db->get_where('comments', array('post_id' => $id));
 
 
-            $this->db->select('name, body', 'post_id');
+            $this->db->select('name, body, post_id, id');
             $this->db->where('post_id', $id);
             $this->db->from('comments');
             $query = $this->db->get();
@@ -48,7 +46,16 @@ class comment_model extends CI_Model {
     }
 
 
+    public function delete($id){
 
+
+        $this->db->where('id', $id);
+        $this->db->delete('comments');
+
+
+
+
+    }
 
 
 

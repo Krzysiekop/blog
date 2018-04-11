@@ -18,6 +18,7 @@
             <div class="form-group row">
     <label for="username">Username</label>
     <input class="form-control" type="input" name="username" /><br />
+    <small  class="form-text text-muted">Username should be unique.</small>
             </div>
             <div class="form-group row">
     <label for="email">Email</label>
