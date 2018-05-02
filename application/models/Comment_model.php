@@ -10,20 +10,20 @@ class comment_model extends CI_Model {
 	
 	
 	public function create()
-{
-    $this->load->helper('url');
-
-    
-
-    $data = array(
-        'name' => $this->input->post('name'),
-        'body' => $this->input->post('text'),
-        'post_id' => $this->input->post('id'),
-    );
+    {
+        $this->load->helper('url');
 
 
-    return $this->db->insert('comments', $data);
-}
+
+        $data = array(
+            'name' => $this->input->post('name'),
+            'body' => $this->input->post('text'),
+            'post_id' => $this->input->post('id'),
+        );
+
+
+        return $this->db->insert('comments', $data);
+    }
 
 
     public function get_comments($id)

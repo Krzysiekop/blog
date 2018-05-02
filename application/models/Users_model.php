@@ -48,19 +48,18 @@ class users_model extends CI_Model {
                   
 
             if ($query->num_rows() > 0)
-           {
+             {
 
+               return 0;
 
-           return 0;
+              }
 
-           }
+            else
+              {
 
-           else
-           {    
+                return 1;
 
-            return 1;
-
-           }
+              }
 
 
    
@@ -77,18 +76,18 @@ class users_model extends CI_Model {
             $query = $this->db->get();
 
              if ($query->num_rows() > 0)
-                       {
+                  {
                      
                        return TRUE;
 
-                       }
+                  }
 
-                       else
-                       {    
+                  else
+                   {
 
                         return FALSE;
 
-                       }
+                   }
 
 }
 

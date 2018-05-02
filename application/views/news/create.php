@@ -11,6 +11,7 @@
 
 <?php echo validation_errors(); ?>
 
+
 <?php echo form_open('news/create'); ?>
             <div class="form-group">
                 <label for="title">Title</label>
@@ -25,7 +26,7 @@
      <div class="form-group">
          <label for="category">Category</label>
          <select name="category" class="form-control" >
-             <option>Web Design</option>
+             <option>WebDesign</option>
              <option>HTML</option>
              <option>CSS</option>
              <option>JavaScript</option>
@@ -33,7 +34,9 @@
          </select>
      </div>
 
+
     <div class="form-group">
+
     <input type="submit" name="submit" class="btn-primary" value="Create post" />
     </div>
 

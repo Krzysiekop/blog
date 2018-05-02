@@ -30,16 +30,19 @@ $id=$this->uri->segment(2);
           <hr>
 
           <!-- Preview Image -->
-          <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+         <!-- <img class="img-fluid rounded" src="http://placehold.it/900x300" alt=""> -->
 
-          <hr>
+            <!--    <hr> -->
 
-          <!-- Post Content -->
+                <!-- Post Content -->
           <p class="lead"><?php echo $news_item['text']; ?></p>
 
-         
-          <hr>
 
+          <hr>
+            <!-- Jeżeli zalogowany to moze dodac foto -->
+            <?php  if ($this->session->userdata('Admin')===true){ ?>
+            <a href="<?php echo site_url("upload/do_upload/$id"); ?>">Add a photo</a>
+            <?php  } else {}  ?>
 <br>
 
             <!-- Jeżeli zalogowany to moze dodac komentarz -->

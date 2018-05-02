@@ -36,35 +36,39 @@ class Comment extends CI_Controller {
 
                 public function create()
                 {
+                    if ($this->session->userdata('is_logged')===true) {
+                        $this->load->helper('form');
+                        $this->load->library('form_validation');
 
-                $this->load->helper('form');
-                $this->load->library('form_validation');
+                        $data['title'] = 'Create a comment';
 
-                $data['title'] = 'Create a comment';
+                        $this->form_validation->set_rules('name', 'Name', 'required|min_length[4]');
+                        $this->form_validation->set_rules('text', 'Text', 'required|min_length[4]');
 
-                $this->form_validation->set_rules('name', 'Name', 'required|min_length[4]');
-                $this->form_validation->set_rules('text', 'Text', 'required|min_length[4]');
+                        if ($this->form_validation->run() === FALSE) {
+                            $this->load->view('templates/header', $data);
+                            $this->load->view('comment/create');
+                            // $this->load->view('templates/footer');
+                        } else {
+                            $this->comment_model->create();
+                            $this->load->view('news/success');
+                        }
 
-                    if ($this->form_validation->run() === FALSE)
-                    {
-                        $this->load->view('templates/header', $data);
-                        $this->load->view('comment/create');
-                       // $this->load->view('templates/footer');
                     }
-
-                    else
-                    {
-                        $this->comment_model->create();
-                        $this->load->view('news/success');
+                    else{
+                        show_404();
                     }
-
-
                 }
 
                     public function delete($id)
                 {
-
-                    $this->comment_model->delete($id);
+                    if ($this->session->userdata('Admin')===true) {
+                        $this->comment_model->delete($id);
+                        $this->load->view('news/success');
+                    }
+                    else{
+                        show_404();
+                    }
                 }
 
 

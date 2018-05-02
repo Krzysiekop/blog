@@ -22,7 +22,8 @@
    <!-- Blog Post -->
    <?php foreach ($news as $news_item): ?>
           <div class="card mb-4">
-            <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+       <!--     <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap"> -->
+            <img class="card-img-top" src="<?php echo "/blog/uploads/{$news_item['id']}.jpg" ?>" alt="">
             <div class="card-body">
               <h2 class="card-title"><?php echo $news_item['title']; ?></h2>
               <p class="card-text"><?php echo $news_item['text']; ?></p>
