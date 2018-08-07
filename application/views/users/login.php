@@ -12,7 +12,7 @@
 <?php echo validation_errors(); ?>
 
 <?php echo form_open('users/login'); ?>
-
+<form>
     <div class="form-group">
     <label for="username">Username</label>
     <input type="input" name="username" class="form-control"  /><br />
@@ -20,7 +20,7 @@
 
             <div class="form-group">
 	<label for="password">Password</label>
-    <input type="password" class="form-control"  name="password"></input><br/>
+    <input type="password" class="form-control"  name="password">  <br/>
             </div>
             <div class="form-group">
     <input type="submit" class="btn btn-primary" name="submit" value="login" />

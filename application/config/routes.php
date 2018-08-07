@@ -60,7 +60,7 @@ $route['default_controller'] = 'pages/view';
 
 
 $route['users/create'] = 'users/create';
-
+$route['news/loadmoredata'] = 'news/loadmoredata';
 
 
 

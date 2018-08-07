@@ -6,10 +6,12 @@ class Users extends CI_Controller {
         {
                 parent::__construct();
                 $this->load->model('users_model');
+                $this->load->model('messages_model');
                 $this->load->helper('url_helper');
                 $this->load->library('session');
                 $this->load->helper('captcha');
-
+                $this->load->model('news_model');
+                $this->perPage = 2;
         }
 
 
@@ -127,13 +129,13 @@ class Users extends CI_Controller {
 
                                 $newdata = array(
                                 'is_logged' => true,
-                                'username' => $this->input->post('username'),
+                                'user_name' => $this->input->post('username'),
                                 'Admin' => true  );                                  }
 
                                     else   {
                                     $newdata = array(
                                     'is_logged' => true,
-                                    'username' => $this->input->post('username'));
+                                    'user_name' => $this->input->post('username'));
 
                                  }
 
@@ -169,7 +171,84 @@ class Users extends CI_Controller {
 
                         }
 
+                        
+                         public function profile($user)
+                        {                     
+                        
+                        $data['count_messages'] = $this->messages_model->countunread($user);     
+                        $data['userzy'] = $this->users_model->get_user($user);   
+                        $data['liczba_postow']=$this->users_model->countPosts($user); 
+                        
+                        
+                        
+                        $this->load->view('templates/header');
+                        
+                        $this->load->view('users/profile', $data);
+                        $this->load->view('templates/footer');
+
+                        }
         
+                        
+                        
+                        
+                       public function countposts($user){
+                           
+                        $data['liczba_postow']=$this->users_model->countPosts($user);
+                           
+                        
+                        $this->load->view('templates/header');
+                        
+                        $this->load->view('users/profile', $data);
+                        $this->load->view('templates/footer');
+                           
+                           
+                           
+                           
+                       }
+                        
+                        
+                        
+                    public function ban($username){
+                                   
+                        if ($this->session->userdata('Admin')===true){
+                    
+                        $this->users_model->banUser($username);
+                        
+                        }
+                        else {
+                            
+                            show_404();
+                            
+                        }
+                                                      
+                    }
+                        
+                        
+                   public function loadmoredata(){
+                                $conditions = array();
+
+                                // Get last post ID
+                                $lastID = $this->input->post('id');
+
+                                // Get post rows num
+                                $conditions['where'] = array('id >'=>$lastID);
+                                $conditions['returnType'] = 'count';
+                                $data['postNum'] = $this->news_model->getRows($conditions);
+
+                                // Get posts data from the database
+                                $conditions['returnType'] = '';
+                                //$conditions['order_by'] = "id DESC";
+                                $conditions['limit'] = $this->perPage;
+                                $data['posts'] = $this->news_model->getRows($conditions);
+
+                                $data['postLimit'] = $this->perPage;
+
+                                // Pass data to view
+                                $this->load->view('news/load_more_data', $data, false);
+    }
+                        
+                        
+                        
     } 
 
 
@@ -179,6 +258,7 @@ class Users extends CI_Controller {
 
 
 
+    
 
 
 

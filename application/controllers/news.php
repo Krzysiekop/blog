@@ -26,7 +26,7 @@ class News extends CI_Controller {
         public function view($slug = null)  {
 
                 $data['news_item'] = $this->news_model->get_news($slug);
-
+                    
 
                 $data2['comments'] = $this->comment_model->get_comments($slug);
 
@@ -38,13 +38,38 @@ class News extends CI_Controller {
 				$data['title'] = $data['news_item']['title'];
 
 				$this->load->view('templates/header', $data);
-                $this->load->view('news/view', $data);
+                                $this->load->view('news/view', $data);
 				$this->load->view('comment/view', $data2);
 				$this->load->view('templates/footer');
 		
 		}
 
+                
+             public function loadmoredata(){
+                                $conditions = array();
 
+                                // Get last post ID
+                                $lastID = $this->input->post('id');
+
+                                // Get post rows num
+                                $conditions['where'] = array('id >'=>$lastID);
+                                $conditions['returnType'] = 'count';
+                                $data['postNum'] = $this->post->getRows($conditions);
+
+                                // Get posts data from the database
+                                $conditions['returnType'] = '';
+                             //   $conditions['order_by'] = "id DESC";
+                                $conditions['limit'] = $this->perPage;
+                                $data['posts'] = $this->post->getRows($conditions);
+
+                                $data['postLimit'] = $this->perPage;
+
+                                // Pass data to view
+                                $this->load->view('news/load_more_data', $data, false);
+    }
+             
+                
+         
                 public function create()
                 {
                     if ($this->session->userdata('is_logged') === true) {
@@ -136,7 +161,7 @@ class News extends CI_Controller {
                     $data['title'] = 'News archive';
 
                     $this->load->view('templates/header', $data);
-                    $this->load->view('news/index', $data);
+                    $this->load->view('news/index_2', $data);
                     $this->load->view('templates/footer');
 
 
@@ -144,6 +169,35 @@ class News extends CI_Controller {
 
                 }
 
+                
+                  public function categoryUser(){
 
+                    $user=$this->uri->segment(3);
+                    $data['news']=$this->news_model->categoryUser($user);
+                    
+                        //index bez AJAX/JQuerry
+                    $this->load->view('templates/header', $data);
+                    $this->load->view('news/index_2', $data);
+                    $this->load->view('templates/footer');
+
+
+
+
+                }
+                
+public function categoryUserComments(){
+
+                    $user=$this->uri->segment(3);
+                    $data['comments']=$this->news_model->categoryUserComments($user);
+                    
+
+                    $this->load->view('templates/header', $data);
+                    $this->load->view('comment/view', $data);
+                    $this->load->view('templates/footer');
+
+
+
+
+                }
 
 }

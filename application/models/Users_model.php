@@ -4,7 +4,7 @@ class users_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
-    $this->load->library('session');
+                $this->load->library('session');
         
 	}
 	
@@ -90,39 +90,46 @@ class users_model extends CI_Model {
                    }
 
 }
-
-
-
-
-
-
-
-
-
-//     public function delete_news($id)
-// {
+  public function user_profile()
+{
     
-//     $this->db->where('id', $id);
-//     $this->db->delete('news');
-  
-// }
- 
-//     public function edit_news($id)
-// {
 
-//     $this->load->helper('url');
-//     $slug = url_title($this->input->post('title'), 'dash', TRUE);
+}
+
+public function get_user($username)
+{
+           
+            $this->db->select();
+            $this->db->where('username', $username);
+            $this->db->from('users');
+            $query = $this->db->get();
+          return $query->result_array();
+         
     
-//     $data = array(
-//         'title' => $this->input->post('title'),
-//         'slug' => $slug,
-//         'text' => $this->input->post('text')
-//     );    
+}
+
+public function countPosts($username){
+
+
+        $query = $this->db->get_where('news', array('user_id' => $username));
+        return $query->num_rows();
+
+}
+
+public function banUser($username){
     
     
-//     //$this->db->set('text', $data[text);
-//     $this->db->where('id', $id);
-//     $this->db->update('news', $data);  // Produces: INSERT INTO mytable (`name`) VALUES ('{$name}')
-// }
+    
+    $data['banned'] = 1;
+
+        $this->db->where('username', $username);
+        $this->db->update('users', $data);
+    
+    
+}
+
+
+
+
 	
 }

@@ -19,7 +19,7 @@ $id=$this->uri->segment(2);
           <!-- Author -->
           <p class="lead">
             by
-            <a href="#"><?php echo $news_item['user_id'] ?></a>
+            <a href="<?php echo site_url('users/profile/'.$news_item['user_id']); ?>"><?php echo $news_item['user_id'] ?></a>
           </p>
 
           <hr>

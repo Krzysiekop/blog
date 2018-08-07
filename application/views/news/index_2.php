@@ -1,25 +1,5 @@
 
-<script type="text/javascript">
-$(document).ready(function(){
-    $(window).scroll(function(){
-        var lastID = $('.load-more').attr('lastID');
-         if(($(window).scrollTop() == $(document).height() - $(window).height()) && (lastID != 0)){
-                $.ajax({
-                type:'POST',
-                url:'<?php echo site_url('users/loadmoredata'); ?>',
-                data:'id='+lastID,
-                beforeSend:function(){
-                    $('.load-more').show();
-                },
-                success:function(html){
-                    $('.load-more').remove();
-                    $('.col-md-8').append(html);
-               }
-            });
-        }
-    });
-});
-</script>
+
 
 
  <div class="container">
@@ -61,9 +41,7 @@ $(document).ready(function(){
           </div>
 		<?php endforeach; ?>
    
-   <div class="load-more" id="load-more" lastID="<?php if (isset($news_item['id']))  echo $news_item['id']; ?>" ">
-                 <img src="<?php echo base_url('assets/images/load.gif'); ?>"/> Loading more posts...
-        </div>
+  
 
 
            </div>

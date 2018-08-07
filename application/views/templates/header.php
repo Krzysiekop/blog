@@ -15,7 +15,19 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>assets/css/blog-home.css" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+    
+    
+ 
+    
+    
+<!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    -->
+    
   </head>
 
   <body>
@@ -30,18 +42,23 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
 
             <!--NAVBAR GDY USER JEST ZALOGOWANY -->
-           <?php if (null !==($this->session->userdata('username'))) { ?>
+           <?php if (null !==($this->session->userdata('user_name'))) { ?>
 
             <ul class="navbar-nav ml-auto">
-                          <a class="nav-link"><?php  if (null !==($this->session->userdata('username'))) {
-								echo "Witaj ".$this->session->userdata('username');	}  ; ?>  
+                <li class="nav-item">       
+                <a class="nav-link" href="<?php echo base_url(); ?>index.php/users/profile/<?php echo $this->session->userdata('user_name');?>">
+                <?php echo "Welcome ".$this->session->userdata('user_name')." See your profile";	 ?>  
 						  </a>
-            <li class="nav-item active">
+                    </li>
+<!--            <li class="nav-item active">-->
+                <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/news">Home
+                  
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
+                                   
+                <li class="nav-item">
               <a class="nav-link" href="<?php echo site_url('news/create/'); ?>">Create post</a>
             </li> 
               <li class="nav-item">
@@ -56,7 +73,7 @@
             <?php } else{  ?>
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item active">
+               <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url(); ?>index.php/news">Home
                         <span class="sr-only">(current)</span>
                     </a>

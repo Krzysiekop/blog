@@ -33,7 +33,7 @@ class comment_model extends CI_Model {
         //$query = $this->db->get_where('comments', array('post_id' => $id));
 
 
-            $this->db->select('name, body, post_id, id');
+            $this->db->select('name, body, post_id, id, created_at');
             $this->db->where('post_id', $id);
             $this->db->from('comments');
             $query = $this->db->get();

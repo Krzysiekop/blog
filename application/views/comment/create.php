@@ -16,8 +16,9 @@
 <?php echo form_open('comment/create/'); ?>
 
             <div class="form-group">
-    <label for="name">Name</label>
-    <input type="input" class="form-control" name="name" value="<?php   echo $this->session->userdata('username') ;   ?>" readonly/><br />
+                
+                <label for="name">Name</label>
+    <input type="input" class="form-control" name="name" value="<?php   echo $this->session->userdata('user_name') ;   ?>" readonly/><br />
             </div>
             <div class="form-group">
     <label for="text">Text</label>
@@ -28,7 +29,7 @@
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
             </div>
  
-</form>
+
 
 
         </div>
